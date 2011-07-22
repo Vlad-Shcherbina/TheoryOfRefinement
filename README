@@ -1,0 +1,41 @@
+
+
+
+=========== Instructions =============
+
+
+====== GIT ======
+
+== Setting up ==
+
+Register on github and send me (vlad.shcherbina@gmail.com) your account.
+
+Install msysgit (if you are on windows)
+
+Generate keys (http://help.github.com/msysgit-key-setup/)
+Upload your public key on github account settings page
+
+Line endings:
+  for linux    git config --global core.autocrlf input
+  for windows  git config --global core.autocrlf true
+
+git config --global user.name "Your Name"
+git config --global user.email "address you used to register on github"
+
+git clone git@github.com:Vlad-Shcherbina/TheoryOfRefinement.git
+
+
+== Git working cycle ==
+
+git pull
+[hack, hack, hack]
+git add <files you changed>
+gitk (to ensure you added to index all changes you indended to add)
+// also, you can use 'git gui' command to do adds and commits
+git commit (or git gui for better and precise commit management)
+git pull
+[resolve conflicts if any]
+git push
+
+
+
