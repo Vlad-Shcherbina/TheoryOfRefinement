@@ -105,5 +105,32 @@ implies left distributivity.
 \end{theorem}
 
 
+\subsection*{Locality and frame rules}
+Theorems seem trivial.
+
+\subsection*{Separation logic}
+
+\begin{axiom}[commutativity and associativity of $|$]
+\end{axiom}
+
+\begin{law}[Exchange]
+$(p|p');(q|q') \refines (p;q)|(p';q')$
+\end{law}
+
+\begin{rul}[Parallel for Hoare]
+$\{p\}q\{r\}$ and $\{p'\}q'\{r'\}$ imply $\{p|p'\} q|q' \{r|r'\}$
+\end{rul}
+
+\begin{rul}[Parallel for Milner]
+Likewise.
+\end{rul}
+
+\begin{theorem}
+Exchange law implies parallel rules for Hoare and Milner.
+\end{theorem}
+
+\begin{theorem}
+Parallel rules for Hoare and Milner imply exchange law.
+\end{theorem}
 
 \end{document}
