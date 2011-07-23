@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amssymb}
+
+\begin{document}
+
+\newcommand{\refines}{\sqsubseteq}
+
+\newtheorem{axiom}{Axiom}
+\newtheorem{law}{Law}
+\newtheorem{rul}{Rule}
+\newtheorem{theorem}{Theorem}
+
+
+\begin{axiom} [$\refines$ is partial order]
+\end{axiom}
+
+\begin{axiom} [Monotonicity of $;$]
+\end{axiom}
+
+
+\begin{law}[Assoc. of ;]
+$p;(q;r) = (p;q);r$
+\end{law}
+
+\begin{rul}[Sequence rule for Hoare]
+$\{p\}q\{s\}, \{s\}q'\{r\}$ implies $\{p\}q;q'\{r\}$
+\end{rul}
+
+Same rules for Milner, Plotkin, test.
+
+\begin{theorem}
+Sequence rules for Hoare+Plotkin or Milner+test imply associativity law.
+\end{theorem}
+
+
+\end{document}
