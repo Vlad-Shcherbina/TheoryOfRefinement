@@ -18,6 +18,9 @@
 \newtheorem{definition}{Definition}
 
 
+Laws and rules are mere shortcuts for some statements.
+Only theorems are supposed to be proven (and they typically state that
+some rule implies some law or vice versa).
 
 
 \begin{axiom} [$\refines$ is partial order]
@@ -100,8 +103,8 @@ Left distributivity implies nondeterminism for all four formalisms.
 
 
 \begin{theorem}
-Nondeterminism for (Hoare or Milner) and (Plotkin or test) 
-implies left distributivity.
+Nondeterminism rules for (Hoare or Milner) and (Plotkin or test) 
+imply left distributivity.
 \end{theorem}
 
 
@@ -112,6 +115,8 @@ Theorems seem trivial.
 
 \begin{axiom}[commutativity and associativity of $|$]
 \end{axiom}
+
+Do we need it?
 
 \begin{law}[Exchange]
 $(p|p');(q|q') \refines (p;q)|(p';q')$
@@ -131,6 +136,50 @@ Exchange law implies parallel rules for Hoare and Milner.
 
 \begin{theorem}
 Parallel rules for Hoare and Milner imply exchange law.
+\end{theorem}
+
+
+\subsection*{Weakest preconditions}
+
+\begin{definition}
+$wp(q, r) = \textrm{largest } p$ such that $\{p\}q\{r\}$.
+\end{definition}
+
+\begin{law}[adjointness]
+$p\refines wp(q, r)$ iff $p;q \refines r$
+\end{law}
+
+Do we need  definition (because it seems that law is enough)?
+
+\begin{rul}[WP1]
+$wp(q, r); q \refines r$
+\end{rul}
+
+\begin{rul}[WP2]
+$p \refines wp(q, (p;q))$
+\end{rul}
+
+\begin{theorem}
+Adjointness law implies WP1 and WP2.
+\end{theorem}
+
+\begin{theorem}
+WP1 and WP2 imply adjointness law.
+\end{theorem}
+
+
+%% wp properties 
+
+\begin{theorem}[wp monotonicity]
+$q_1 \refines q, r \refines r'$ imply $wp(q, r) \refines wp(q_1, r')$
+\end{theorem}
+
+\begin{theorem}[stepwise wp]
+$wp((q;q'), r) \refines wp(q, wp(q', r))$
+\end{theorem}
+
+\begin{theorem}
+$wp(q, r) \refines wp((q;s), (r;s))$
 \end{theorem}
 
 \end{document}
