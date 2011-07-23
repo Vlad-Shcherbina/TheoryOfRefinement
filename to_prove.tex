@@ -1,14 +1,23 @@
 \documentclass{article}
 \usepackage{amssymb}
+\usepackage{amsmath}
 
 \begin{document}
 
 \newcommand{\refines}{\sqsubseteq}
+\newcommand{\eps}{\varepsilon}
+
+\newcommand{\plotkin}[1]{\stackrel{#1}{\rightarrow}}
+\newcommand{\milner}[1]{\stackrel{#1}{\leadsto}}
+
 
 \newtheorem{axiom}{Axiom}
 \newtheorem{law}{Law}
-\newtheorem{rul}{Rule}
+\newtheorem{rul}{Rule}  % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+
+
 
 
 \begin{axiom} [$\refines$ is partial order]
@@ -18,19 +27,83 @@
 \end{axiom}
 
 
+\subsection*{Associativity and sequence rules}
+
 \begin{law}[Assoc. of ;]
 $p;(q;r) = (p;q);r$
 \end{law}
 
 \begin{rul}[Sequence rule for Hoare]
-$\{p\}q\{s\}, \{s\}q'\{r\}$ implies $\{p\}q;q'\{r\}$
+$\{p\}q\{s\}, \{s\}q'\{r\}$ imply $\{p\}q;q'\{r\}$
 \end{rul}
 
 Same rules for Milner, Plotkin, test.
 
 \begin{theorem}
+Associativity law implies all sequence rules.
+\end{theorem}
+
+\begin{theorem}
 Sequence rules for Hoare+Plotkin or Milner+test imply associativity law.
 \end{theorem}
+
+
+\subsection*{Skip}
+
+\begin{law}[Skip]
+$p;\eps = p = \eps;p$
+\end{law}
+
+\begin{rul}[Nullity for Hoare]
+$\{p\}\eps\{p\}$
+\end{rul}
+
+Same for Plotkin, Milner, test.
+
+\begin{theorem}
+Skip law implies all nullity rules.
+\end{theorem}
+
+\begin{theorem}
+Conjunction of all nullity rules implies skip law.
+\end{theorem}
+
+
+\subsection*{Distribution and nondeterminism}
+
+\begin{definition}[$\sqcup$]
+\end{definition}
+
+\begin{law}[Left distributivity]
+$p; (q \sqcup q') = p;q \sqcup p;q'$
+\end{law}
+
+\begin{rul}[Nondeterminism for Hoare]
+$\{p\}q\{r\}, \{p\}q'\{r\}$ imply $\{p\}q\sqcup q'\{r\}$
+\end{rul}
+
+\begin{rul}[Nondeterminism for Milner]
+$p \milner{q} r, p \milner{q'} r$ imply $p \milner{q\sqcup q'} r$
+\end{rul}
+
+\begin{rul}[Nondeterminism for Plotkin]
+$p \plotkin{q} r$ or $p \plotkin{q'} r$ implies $p \plotkin{q\sqcup q'} r$
+\end{rul}
+
+\begin{rul}[Nondeterminism for test]
+$p [q] r$ or $p [q'] r$ implies $p [q;q'] r$
+\end{rul}
+
+\begin{theorem}
+Left distributivity implies nondeterminism for all four formalisms.
+\end{theorem}
+
+
+\begin{theorem}
+Nondeterminism for (Hoare or Milner) and (Plotkin or test) 
+implies left distributivity.
+\end{theorem}
+
 
 
 \end{document}
