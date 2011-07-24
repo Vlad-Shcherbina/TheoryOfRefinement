@@ -16,3 +16,8 @@ unfold SkipLaw.
 unfold NullityForHoare.
 unfold HoareTriple.
 intuition.
+assert (p; eps = p).
+  apply H.
+rewrite H0.
+trivial.
+Qed.
