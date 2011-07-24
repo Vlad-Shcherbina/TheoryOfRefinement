@@ -19,14 +19,44 @@ Proof.
 unfold AssociativityLaw, SequenceRule, HoareTriple.
 intro Assoc.
 intuition.
-apply Transitivity with(y:=(p;q);q').
-split.
-  rewrite Assoc.
-  trivial.
-
-  apply Transitivity with (y:=s;q').
-  auto.
+rewrite <- Assoc.
+eauto.
 Qed.
+
+Print ASH.
+
+
+Theorem ASP: AssociativityLaw -> SequenceRule PlotkinReduction.
+Proof.
+unfold AssociativityLaw, SequenceRule, PlotkinReduction.
+intro Assoc.
+intuition.
+rewrite <- Assoc.
+apply Transitivity with (y := s;q').
+auto.
+Qed.
+
+
+Theorem ASM: AssociativityLaw -> SequenceRule MilnerTransition.
+Proof.
+unfold AssociativityLaw, SequenceRule, MilnerTransition.
+intro Assoc.
+intuition.
+rewrite Assoc.
+eauto.
+Qed.
+
+
+Theorem AST: AssociativityLaw -> SequenceRule TestGeneration.
+Proof.
+unfold AssociativityLaw, SequenceRule, TestGeneration.
+intro Assoc.
+intuition.
+rewrite Assoc.
+eauto.
+Qed.
+
+
 
 (* TODO for other triples*)
 
