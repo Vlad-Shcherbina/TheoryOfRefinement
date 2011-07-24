@@ -105,8 +105,6 @@ We are to prove that $p \refines (q; q'); r$\\
 $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
 \end{proof}
 
-
-
 \begin{theorem}
 Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 \end{theorem}
@@ -332,7 +330,27 @@ Left locality implies Hoare frame rule.
 \begin{proof}
 Let $p; q \refines r$.\\
 We are to prove $(p | s); q \refines r | s$.\\
-$(p | s); q \refines p | (s ; q)$
+$(p | s); q = (s | p); q \refines s | (p ; q) \refines s | r = r | s$
+\end{proof}
+
+\begin{theorem}
+Right locality implies Milner frame rule.
+\end{theorem}
+
+\begin{proof}
+Let $q; r \refines p$.\\
+We are to prove $q; (r | s) \refines p | s$.\\
+$q; (r |s) \refines (q; r) | s \refines p | s$.\\
+\end{proof}
+
+\begin{theorem}
+Hoare frame rule implies left locality.
+\end{theorem}
+
+\begin{proof}
+Let $p; q \refines r$ implies $(p | s); q \refines r | s$.\\
+$(p | s); q = (s | p); q \refines r | s$\\
+$s | (p; q) \refines s | r = r | s$\\
 \end{proof}
 
 \subsection*{Separation logic}
@@ -367,6 +385,8 @@ Parallel rules for Hoare and Milner imply exchange law.
 
 \begin{definition}
 $wp(q, r) = \textrm{largest } p$ such that $\{p\}q\{r\}$.
+That is, we postulate that $\{wp(q, r)\} q \{r\}$ and 
+for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 
 \begin{law}[adjointness]
