@@ -305,8 +305,6 @@ Then $p = q; r \sqcup q'; r$.\\
 
 \subsection*{Locality and frame rules}
 
-\textbf{PROOF IN PROGRESS!}
-
 \begin{law}[Left locality]
 $(s | p); q \refines s | (p; q)$
 \end{law}
@@ -348,9 +346,10 @@ Hoare frame rule implies left locality.
 \end{theorem}
 
 \begin{proof}
-Let $p; q \refines r$ implies $(p | s); q \refines r | s$.\\
-$(p | s); q = (s | p); q \refines r | s$\\
+Let $p; q \refines r$ implies $(p | s); q = (s | p); q \refines r | s = s | r$.\\
 $s | (p; q) \refines s | r = r | s$\\
+Let $q; r \refines p$ implies $q; (r | s) = q; (s | r) \refines p | s = s | p$.\\
+$(q; r) | s \refines p | s = s | p$
 \end{proof}
 
 \subsection*{Separation logic}
