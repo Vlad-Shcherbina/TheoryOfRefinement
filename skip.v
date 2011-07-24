@@ -12,12 +12,12 @@ Definition NullityForHoare :=
 
 Theorem SkipImpliesNullityForHoare : SkipLaw -> NullityForHoare.
 Proof.
-unfold SkipLaw.
+intro SL.
 unfold NullityForHoare.
 unfold HoareTriple.
 intuition.
-assert (p; eps = p).
-  apply H.
-rewrite H0.
+assert (TMP : p; eps = p).
+  apply SL.
+rewrite TMP.
 trivial.
 Qed.
