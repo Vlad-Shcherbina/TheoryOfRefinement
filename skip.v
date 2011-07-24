@@ -4,7 +4,7 @@ Variable eps : D.
 
 Definition SkipLaw :=
   forall p : D,
-  p; eps = p /\ eps; p = p.
+  p; eps = p /\ p = eps; p.
 
 Definition NullityForHoare :=
   forall p : D,
@@ -53,6 +53,7 @@ unfold NullityForTest.
 unfold TestGeneration.
 intuition.
 assert (TMP : eps ; p = p).
+symmetry.
 apply SL.
 rewrite TMP.
 trivial.
@@ -65,6 +66,7 @@ unfold NullityForMilner.
 unfold MilnerTransition.
 intuition.
 assert (TMP : eps ; p = p).
+symmetry.
 apply SL.
 rewrite TMP.
 trivial.
