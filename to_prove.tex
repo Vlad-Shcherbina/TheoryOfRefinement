@@ -64,11 +64,11 @@ $\{p\}q\{s\}$ and $\{s\}q'\{r\}$ imply $\{p\}q;q'\{r\}$
 \end{rul}
 
 \begin{rul}[Sequence rule for Plotkin]
-$\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$ imply $\left\langle p, (q; q') \right\rangle \rightarrow r$
+$\plotkin{p}{q}{s}$ and $\plotkin{s}{q'}{r}$ imply $\plotkin{p}{(q; q')}{r}$
 \end{rul}
 
 \begin{rul}[Sequence rule for Milner]
-$p - q \rightarrow s$ and $s - q' \rightarrow r$ imply $p - (q; q') \rightarrow r$
+$\milner{p}{q}{s}$ and $\milner{s}{q'}{r}$ imply $\milner{p}{(q; q')}{r}$
 \end{rul}
 
 \begin{rul}[Sequence rule for testgen]
@@ -78,31 +78,31 @@ $p [q] s$ and $s [q] r$ imply $p [q; q'] r$
 \begin{theorem}
 Associativity law implies all sequence rules.
 \end{theorem}
-
-Rule 1.\\
+\begin{proof}
+Hoare.\\
 Let $\{p\}q\{s\}$ and $\{s\}q'\{r\}$.\\
 According to the definition it means $p; q \refines s$ and $s; q' \refines r$\\
 We are to prove that $p; (q; q') \refines r$\\
 $p; (q; q') =^{assoc.} (p; q); q' \refines^{mon.} s; q' \refines r$\\
 \\
-Rule 2.\\
-Let $\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$.\\
+Plotkin.\\
+Let $\plotkin{p}{q}{s}$ and $\plotkin{s}{q'}{r}$.\\
 According to the definition it means $s \refines p; q$ and $r \refines s; q'$\\
 We are to prove that $r \refines p; (q; q')$\\
-$r \refines s; q' \refines^{mon.} (p; q); q' =^{assoc.} p; (q; q')$
+$r \refines s; q' \refines^{mon.} (p; q); q' =^{assoc.} p; (q; q')$\\
 \\
-Rule 3.\\
-Let $p - q \rightarrow s$ and $s - q' \rightarrow r$\\
+Milner.\\
+Let $\milner{p}{q}{s}$ and $\milner{s}{q'}{r}$.\\
 According to the definition it means $q; s \refines p; q$ and $q'; r \refines s$\\
 We are to prove that $(q; q'); r \refines p$\\
-$(q; q'); r =^{assoc.} q; (q'; r) \refines^{mon.} q; s \refines p$
+$(q; q'); r =^{assoc.} q; (q'; r) \refines^{mon.} q; s \refines p$\\
 \\
-Rule 4.\\
+Testgen.\\
 Let $p [q] s$ and $s [q'] r$\\
 According to the definition it means $p \refines q; s$ and $s \refines q'; r$\\
 We are to prove that $p \refines (q; q'); r$\\
 $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
-\\
+\end{proof}
 \begin{theorem}
 Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 \end{theorem}
@@ -111,76 +111,225 @@ Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 Hoare + Plotkin.\\
 Let $\{p\}q\{s\}$ and $\{s\}q'\{r\}$ imply $\{p\}q;q'\{r\}$\\
 and\\
-$\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$ imply $\left\langle p, (q; q') \right\rangle \rightarrow r$\\
+$\plotkin{p}{q}{s}$ and $\plotkin{s}{q'}{r}$ imply $\plotkin{p}{(q;q')}{r}$\\
 According to the definition it means\\
 $p; q \refines s$ and $s; q' \refines r$ imply $p; (q; q') \refines r$\\
 and\\
 $s \refines p; q$ and $r \refines s; q'$ imply $r \refines p; (q; q')$\\
 As $\refines$ is partial order then $p; q = s$ and $s; q' = r$\\
 Also $p; (q; q') = r$.\\
-$p; (q; q') = r = s; q' = (p; q); q'$.
+$p; (q; q') = r = s; q' = (p; q); q'$.\\
+\\
+Milner + testgen.\\
+Let $\milner{p}{q}{s}$ and $\milner{s}{q'}{r}$ imply $\milner{p}{(q;q')}{r}$\\
+and\\
+$p [q] s$ and $s [q'] r$ imply $p [q; q'] r$\\
+According to the definition it means\\
+$q; s \refines p$ and $q'; r \refines s$ imply $(q; q'); r \refines p$\\
+and\\
+$p \refines q; s$ and $s \refines q'; r$ imply $p \refines (q; q'); r$\\
+As $\refines$ is partial order then $p = q; s$ and $s = q'; r$\\
+Also $p = (q; q'); r$.\\
+$(q; q'); r = q; s = q; (q'; r)$
 \end{proof}
 
 \subsection*{Skip}
 
 \begin{law}[Skip]
-$p;\eps = p = \eps;p$
+$p; \eps = p = \eps; p$
 \end{law}
 
 \begin{rul}[Nullity for Hoare]
-$\{p\}\eps\{p\}$
+$\{p\} \eps \{p\}$
 \end{rul}
 
-Same for Plotkin, Milner, test.
+\begin{rul}[Nullity for Plotkin]
+$\plotkin{p}{\eps}{p}$
+\end{rul}
+
+\begin{rul}[Nullity for Milner]
+$\milner{p}{\eps}{p}$
+\end{rul}
+
+\begin{rul}[Nullity for testgen]
+$p [\eps] p$
+\end{rul}
 
 \begin{theorem}
 Skip law implies all nullity rules.
 \end{theorem}
 
+\begin{proof}
+As $\refines$ is reflexive\\
+$p \refines p$\\
+$p; \eps \refines p$\\
+$\{p\} \eps \{p\}$\\
+\\
+$p \refines p$\\
+$p; \refines p; \eps$\\
+$\plotkin{p}{\eps}{p}$\\
+\\
+$p \refines p$\\
+$\eps; p \refines p$\\
+$\milner{p}{\eps}{p}$\\
+\\
+$p \refines p$\\
+$p \refines \eps; p$\\
+$p [\eps] p$
+\end{proof}
+
 \begin{theorem}
 Conjunction of all nullity rules implies skip law.
 \end{theorem}
 
+\begin{proof}
+$\{p\} \eps \{p\}$ implies $p; \eps \refines p$\\
+$\plotkin{p}{\eps}{p}$ implies $p; \refines p; \eps$\\
+As $\refines$ is partial order then $p = p; \eps$\\
+$\milner{p}{\eps}{p}$ implies $\eps; p; \refines p$\\
+$p [\eps] p$ implies $p \refines \eps; p$\\
+As $\refines$ is partial order then $p = \eps; p$\\
+So we have $p = p; \eps = \eps; p$
+\end{proof}
 
 \subsection*{Distribution and nondeterminism}
 
 \begin{definition}[$\sqcup$]
-$p \sqcup q$ is smallest $r$ such that $p \refines r, q \refines r$.
+$p \sqcup q$ is the smallest $r$ such that $p \refines r$ and $q \refines r$.
 \end{definition}
 
 \begin{law}[Left distributivity]
-$p; (q \sqcup q') = p;q \sqcup p;q'$
+$p; (q \sqcup q') = p; q \sqcup p; q'$
 \end{law}
 
-\begin{rul}[Nondeterminism for Hoare]
-$\{p\}q\{r\}, \{p\}q'\{r\}$ imply $\{p\}q\sqcup q'\{r\}$
-\end{rul}
+\begin{law}[Right distributivity]
+$(q \sqcup q'); r = q; r \sqcup q'; r$
+\end{law}
 
-\begin{rul}[Nondeterminism for Milner]
-$\milner{p}{q}{r}, \milner{p}{q'}{r}$ imply $\milner{p}{q\sqcup q'}{r}$
+\begin{theorem}
+Non-determinism is commutative, increasing and idempotent.
+\end{theorem}
+
+\begin{proof}
+Commutativity is obvious (directly by definition).\\
+\\
+Let's prove $p \refines p \sqcup q$ for any $q$.\\
+$p \sqcup q = r$ where $r$ is the smallest that $p \refines r$ and $q \refines r$.\\
+$p \refines r = p \sqcup q$.\\
+\\
+Let's prove $p \sqcup p = p$.\\
+$p \sqcup p = r$ where $r$ is the smallest that $p \refines r$.\\
+As $\refines$ is reflexive then $p \refines p$ and $p$ is the smallest.
+$p = r = p \sqcup p$.
+\end{proof}
+
+\begin{rul}[Nondeterminism for Hoare]
+$\{p\}q\{r\}$ and $\{p\}q'\{r\}$ imply $\{p\} q \sqcup q' \{r\}$
 \end{rul}
 
 \begin{rul}[Nondeterminism for Plotkin]
-$\plotkin{p}{q}{r}$ or $\plotkin{p}{q'}{r}$ implies $\plotkin{p}{q\sqcup q'}{r}$
+$\plotkin{p}{q}{r}$ or $\plotkin{p}{q'}{r}$ imply $\plotkin{p}{(q \sqcup q')}{r}$
 \end{rul}
 
-\begin{rul}[Nondeterminism for test]
-$p [q] r$ or $p [q'] r$ implies $p [q;q'] r$
+\begin{rul}[Nondeterminism for Milner]
+$\milner{p}{q}{r}$ and $\milner{p}{q'}{r}$ imply $\milner{p}{(q \sqcup q')}{r}$
+\end{rul}
+
+\begin{rul}[Nondeterminism for testgen]
+$p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 \end{rul}
 
 \begin{theorem}
-Left distributivity implies nondeterminism for all four formalisms.
+Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
 
+\begin{proof}
+Hoare.\\
+Let $p; q \refines r$ and $p; q' \refines r$.\\
+We have to proove $p; (q \sqcup q') \refines r$.\\
+$p; (q \sqcup q') = p; q \sqcup p; q' \refines^{mon.} r \sqcup r =^{idemp.} r$.\\
+\\
+Plotkin.\\
+Let $r \refines p; q$ (1) or $r \refines p; q'$ (2).\\
+We have to proove $r \refines p; (q \sqcup q')$.\\
+1. $r \refines^{increas.} r \sqcup p; q' \refines^{mon.} p; q \sqcup p; q' =^{law} p; (q \sqcup q')$\\
+2. $r \refines^{increas.} r \sqcup p; q =^{commut.} p; q \sqcup r \refines^{mon.} p; q \sqcup p; q' =^{law} p; (q \sqcup q')$\\
+\end{proof}
 
 \begin{theorem}
-Nondeterminism rules for (Hoare or Milner) and (Plotkin or test) 
-imply left distributivity.
+Right distributivity implies nondeterminism for Milner and testgen.
 \end{theorem}
 
+\begin{proof}
+Milner.\\
+Let $q; r \refines p$ and $q'; r \refines p$.\\
+We have to proove $(q \sqcup q'); r \refines p$.\\
+$(q \sqcup q'); r = q; r \sqcup q'; r \refines^{mon} p \sqcup p =^{idemp.} = p$.\\
+\\
+Testgen.\\
+Let $p \refines q; r$ (1) or $p \refines q'; r$ (2).\\
+We have to proove $p \refines (q \sqcup q'); r$.\\
+1. $p \refines p \sqcup q'; r \refines q; r \sqcup q'; r = (q \sqcup q'); r$\\
+2. $p \refines p \sqcup q; r = q; r \sqcup p \refines q; r \sqcup q'; r = (q \sqcup q'); r$\\
+\end{proof}
+
+\begin{theorem}
+Nondeterminism rules for Hoare and Plotkin imply left distributivity.
+\end{theorem}
+
+\begin{proof}
+Let $p; q \refines r$ and $p; q' \refines r$ imply $p; (q \sqcup q') \refines r$\\
+and $r \refines p; q$ (1) or $r \refines p; q'$ (2) imply $r \refines p; (q \sqcup q')$.\\
+$r = p; (q \sqcup q')$\\
+1. $r \refines r \sqcup p; q' \refines p; q \sqcup p; q' \refines r \sqcup r = r$\\
+Then $r = p; q \sqcup p; q'$.\\
+2. $r \refines r \sqcup p; q = p; q \sqcup r \refines p; q \sqcup p; q' \refines r \sqcup r = r$\\
+Then $r = p; q \sqcup p; q'$.
+\end{proof}
+
+\begin{theorem}
+Nondeterminism rules for Milner and testgen imply right distributivity.
+\end{theorem}
+
+\begin{proof}
+Let $q; r \refines p$ and $q'; r \refines p$ imply $(q \sqcup q'); r \refines p$\\
+and $p \refines q; r$ (1) or $p \refines q'; r$ (2) imply $p \refines (q \sqcup q'); r$.\\
+$p = (q \sqcup q'); r$\\
+1. $p \refines p \sqcup q'; r \refines q; r \sqcup q'; r \refines p \sqcup p = p$\\
+Then $p = q; r \sqcup q'; r$.\\
+2. $p \refines p \sqcup q; r = q; r \sqcup p \refines q; r \sqcup q'; r \refines p \sqcup p = p$\\
+Then $p = q; r \sqcup q'; r$.\\
+\end{proof}
 
 \subsection*{Locality and frame rules}
-Theorems seem trivial.
+
+\textbf{PROOF IN PROGRESS!}
+
+\begin{law}[Left locality]
+$(s | p); q \refines s | (p; q)$
+\end{law}
+
+\begin{law}[Right locality]
+$p; (q | s) \refines (p; q) | s$
+\end{law}
+
+\begin{rul}[Hoare frame rule]
+$\{p\} q \{r\}$ implies $\{p | s\} q \{r | s\}$
+\end{rul}
+
+\begin{rul}[Milner frame rule]
+$\milner{p}{q}{r}$ implies $\milner{p | s}{q}{r | s}$
+\end{rul}
+
+\begin{theorem}
+Left locality implies Hoare frame rule.
+\end{theorem}
+
+\begin{proof}
+Let $p; q \refines r$.\\
+We are to prove $(p | s); q \refines r | s$.\\
+$(p | s); q \refines p | (s ; q)$
+\end{proof}
 
 \subsection*{Separation logic}
 
