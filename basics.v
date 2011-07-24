@@ -40,5 +40,8 @@ Definition MilnerTransition (p q r : D) := q; r ref p.
 Definition TestGeneration (p q r : D) := p ref q; r.
 (* no sugar for these triples because it's ugly anyway *)
 
+Hint Unfold HoareTriple PlotkinReduction MilnerTransition TestGeneration.
+
+
 End basics.
 Export basics.
