@@ -78,6 +78,7 @@ $p [q] s$ and $s [q] r$ imply $p [q; q'] r$
 \begin{theorem}
 Associativity law implies all sequence rules.
 \end{theorem}
+
 \begin{proof}
 Hoare.\\
 Let $\{p\}q\{s\}$ and $\{s\}q'\{r\}$.\\
@@ -103,6 +104,7 @@ According to the definition it means $p \refines q; s$ and $s \refines q'; r$\\
 We are to prove that $p \refines (q; q'); r$\\
 $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
 \end{proof}
+
 \begin{theorem}
 Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 \end{theorem}
