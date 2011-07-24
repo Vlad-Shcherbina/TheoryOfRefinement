@@ -2,12 +2,16 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{color}
 
 \begin{document}
 
 \newcommand{\refines}{\sqsubseteq}
 \newcommand{\refinedby}{\sqsupseteq}
 \newcommand{\eps}{\varepsilon}
+
+% to hide proofs
+%\renewenvironment{proof}{\tiny Proof.}{\qed}
 
 % pretty arrows
 %\newcommand{\plotkin}[3]{#1\stackrel{#2}{\rightarrow}#3}
@@ -22,6 +26,7 @@
 \newtheorem{law}{Law}
 \newtheorem{rul}{Rule}  % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
 
 Laws and rules are mere shortcuts for some statements.
@@ -78,6 +83,8 @@ $p [q] s$ and $s [q] r$ imply $p [q; q'] r$
 \begin{theorem}
 Associativity law implies all sequence rules.
 \end{theorem}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Hoare.\\
@@ -208,9 +215,11 @@ $p; (q \sqcup q') = p; q \sqcup p; q'$
 $(q \sqcup q'); r = q; r \sqcup q'; r$
 \end{law}
 
-\begin{theorem}
+\begin{lemma}
 Non-determinism is commutative, increasing and idempotent.
-\end{theorem}
+\end{lemma}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Commutativity is obvious (directly by definition).\\
@@ -244,6 +253,8 @@ $p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 \begin{theorem}
 Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
+
+{\color{green}Verified 1/2.}
 
 \begin{proof}
 Hoare.\\

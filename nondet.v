@@ -61,7 +61,7 @@ autounfold; autounfold.
 intuition.
 rewrite LD.
 auto.
-
+Qed.
 
 
 
