@@ -12,12 +12,12 @@ Definition SequenceRule (triple : D->D->D->Prop) :=
   triple s q' r ->
   triple p (q;q') r.
 
-
+Hint Unfold  SequenceRule.
 
 Theorem ASH : AssociativityLaw -> SequenceRule HoareTriple.
 Proof.
-unfold AssociativityLaw, SequenceRule, HoareTriple.
 intro Assoc.
+autounfold.
 intuition.
 rewrite <- Assoc.
 eauto.
@@ -28,8 +28,8 @@ Print ASH.
 
 Theorem ASP: AssociativityLaw -> SequenceRule PlotkinReduction.
 Proof.
-unfold AssociativityLaw, SequenceRule, PlotkinReduction.
 intro Assoc.
+autounfold.
 intuition.
 rewrite <- Assoc.
 apply Transitivity with (y := s;q').
@@ -39,8 +39,8 @@ Qed.
 
 Theorem ASM: AssociativityLaw -> SequenceRule MilnerTransition.
 Proof.
-unfold AssociativityLaw, SequenceRule, MilnerTransition.
 intro Assoc.
+autounfold.
 intuition.
 rewrite Assoc.
 eauto.
@@ -49,8 +49,8 @@ Qed.
 
 Theorem AST: AssociativityLaw -> SequenceRule TestGeneration.
 Proof.
-unfold AssociativityLaw, SequenceRule, TestGeneration.
 intro Assoc.
+autounfold.
 intuition.
 rewrite Assoc.
 eauto.
