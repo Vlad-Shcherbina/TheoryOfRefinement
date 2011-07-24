@@ -1,3 +1,8 @@
+(*
+Some outdated stuff we don't need to prove anyway
+*)
+
+
 Load basics.
 
 Definition MonotonicityLaw := 
