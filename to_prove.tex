@@ -5,6 +5,7 @@
 \begin{document}
 
 \newcommand{\refines}{\sqsubseteq}
+\newcommand{\refinedby}{\sqsupseteq}
 \newcommand{\eps}{\varepsilon}
 
 \newcommand{\plotkin}[1]{\stackrel{#1}{\rightarrow}}
@@ -28,6 +29,23 @@ some rule implies some law or vice versa).
 
 \begin{axiom} [Monotonicity of $;$]
 \end{axiom}
+
+
+\begin{definition} [Hoare triple]
+$\{p\}q\{r\}$ means $p;q \refines r$
+\end{definition}
+
+\begin{definition} [Plotkin reduction]
+$p \plotkin{q} r$ means $p; q \refinedby r$
+\end{definition}
+
+\begin{definition} [Milner transition]
+$p \milner{q} r$ means $p \refinedby q; r$
+\end{definition}
+
+\begin{definition} [Test generation semantics]
+$p[q]r$ means $p \refines q;r$
+\end{definition}
 
 
 \subsection*{Associativity and sequence rules}
@@ -75,6 +93,7 @@ Conjunction of all nullity rules implies skip law.
 \subsection*{Distribution and nondeterminism}
 
 \begin{definition}[$\sqcup$]
+$p \sqcup q$ is smallest $r$ such that $p \refines r, q \refines r$.
 \end{definition}
 
 \begin{law}[Left distributivity]
