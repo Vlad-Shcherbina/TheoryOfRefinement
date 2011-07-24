@@ -78,56 +78,31 @@ $p [q] s$ and $s [q] r$ imply $p [q; q'] r$
 \begin{theorem}
 Associativity law implies all sequence rules.
 \end{theorem}
-<<<<<<< HEAD
 \begin{proof}
 Hoare.\\
-=======
-
-\begin{proof}
-(for Hoare)\\
->>>>>>> 48f76d0cfeb8a10bf86ca38a40335960d56037eb
 Let $\{p\}q\{s\}$ and $\{s\}q'\{r\}$.\\
 According to the definition it means $p; q \refines s$ and $s; q' \refines r$\\
 We are to prove that $p; (q; q') \refines r$\\
 $p; (q; q') =^{assoc.} (p; q); q' \refines^{mon.} s; q' \refines r$\\
 \\
-<<<<<<< HEAD
 Plotkin.\\
 Let $\plotkin{p}{q}{s}$ and $\plotkin{s}{q'}{r}$.\\
-=======
-(for Plotkin)\\
-Let $\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$.\\
->>>>>>> 48f76d0cfeb8a10bf86ca38a40335960d56037eb
 According to the definition it means $s \refines p; q$ and $r \refines s; q'$\\
 We are to prove that $r \refines p; (q; q')$\\
 $r \refines s; q' \refines^{mon.} (p; q); q' =^{assoc.} p; (q; q')$\\
 \\
-<<<<<<< HEAD
 Milner.\\
 Let $\milner{p}{q}{s}$ and $\milner{s}{q'}{r}$.\\
-=======
-(for Milner)\\
-Let $p - q \rightarrow s$ and $s - q' \rightarrow r$\\
->>>>>>> 48f76d0cfeb8a10bf86ca38a40335960d56037eb
 According to the definition it means $q; s \refines p; q$ and $q'; r \refines s$\\
 We are to prove that $(q; q'); r \refines p$\\
 $(q; q'); r =^{assoc.} q; (q'; r) \refines^{mon.} q; s \refines p$\\
 \\
-<<<<<<< HEAD
 Testgen.\\
-=======
-(for test)\\
->>>>>>> 48f76d0cfeb8a10bf86ca38a40335960d56037eb
 Let $p [q] s$ and $s [q'] r$\\
 According to the definition it means $p \refines q; s$ and $s \refines q'; r$\\
 We are to prove that $p \refines (q; q'); r$\\
 $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
 \end{proof}
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 48f76d0cfeb8a10bf86ca38a40335960d56037eb
 \begin{theorem}
 Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 \end{theorem}
@@ -353,7 +328,27 @@ Left locality implies Hoare frame rule.
 \begin{proof}
 Let $p; q \refines r$.\\
 We are to prove $(p | s); q \refines r | s$.\\
-$(p | s); q \refines p | (s ; q)$
+$(p | s); q = (s | p); q \refines s | (p ; q) \refines s | r = r | s$
+\end{proof}
+
+\begin{theorem}
+Right locality implies Milner frame rule.
+\end{theorem}
+
+\begin{proof}
+Let $q; r \refines p$.\\
+We are to prove $q; (r | s) \refines p | s$.\\
+$q; (r |s) \refines (q; r) | s \refines p | s$.\\
+\end{proof}
+
+\begin{theorem}
+Hoare frame rule implies left locality.
+\end{theorem}
+
+\begin{proof}
+Let $p; q \refines r$ implies $(p | s); q \refines r | s$.\\
+$(p | s); q = (s | p); q \refines r | s$\\
+$s | (p; q) \refines s | r = r | s$\\
 \end{proof}
 
 \subsection*{Separation logic}
