@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{amsthm}
 
 \begin{document}
 
@@ -8,8 +9,13 @@
 \newcommand{\refinedby}{\sqsupseteq}
 \newcommand{\eps}{\varepsilon}
 
-\newcommand{\plotkin}[1]{\stackrel{#1}{\rightarrow}}
-\newcommand{\milner}[1]{\stackrel{#1}{\leadsto}}
+% pretty arrows
+%\newcommand{\plotkin}[3]{#1\stackrel{#2}{\rightarrow}#3}
+%\newcommand{\milner}[3]{#1\stackrel{#2}{\leadsto}#3}
+
+% ugly arrows
+\newcommand{\plotkin}[3]{\left< #1, #2 \right> \rightarrow #3}
+\newcommand{\milner}[3]{#1-#2\rightarrow #3}
 
 
 \newtheorem{axiom}{Axiom}
@@ -17,7 +23,6 @@
 \newtheorem{rul}{Rule}  % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
-
 
 Laws and rules are mere shortcuts for some statements.
 Only theorems are supposed to be proven (and they typically state that
@@ -36,11 +41,11 @@ $\{p\}q\{r\}$ means $p;q \refines r$
 \end{definition}
 
 \begin{definition} [Plotkin reduction]
-$p \plotkin{q} r$ means $p; q \refinedby r$
+$\plotkin{p}{q}{r}$ means $p; q \refinedby r$
 \end{definition}
 
 \begin{definition} [Milner transition]
-$p \milner{q} r$ means $p \refinedby q; r$
+$\milner{p}{q}{r}$ means $p \refinedby q; r$
 \end{definition}
 
 \begin{definition} [Test generation semantics]
@@ -55,19 +60,66 @@ $p;(q;r) = (p;q);r$
 \end{law}
 
 \begin{rul}[Sequence rule for Hoare]
-$\{p\}q\{s\}, \{s\}q'\{r\}$ imply $\{p\}q;q'\{r\}$
+$\{p\}q\{s\}$ and $\{s\}q'\{r\}$ imply $\{p\}q;q'\{r\}$
 \end{rul}
 
-Same rules for Milner, Plotkin, test.
+\begin{rul}[Sequence rule for Plotkin]
+$\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$ imply $\left\langle p, (q; q') \right\rangle \rightarrow r$
+\end{rul}
+
+\begin{rul}[Sequence rule for Milner]
+$p - q \rightarrow s$ and $s - q' \rightarrow r$ imply $p - (q; q') \rightarrow r$
+\end{rul}
+
+\begin{rul}[Sequence rule for testgen]
+$p [q] s$ and $s [q] r$ imply $p [q; q'] r$
+\end{rul}
 
 \begin{theorem}
 Associativity law implies all sequence rules.
 \end{theorem}
 
+Rule 1.\\
+Let $\{p\}q\{s\}$ and $\{s\}q'\{r\}$.\\
+According to the definition it means $p; q \refines s$ and $s; q' \refines r$\\
+We are to prove that $p; (q; q') \refines r$\\
+$p; (q; q') =^{assoc.} (p; q); q' \refines^{mon.} s; q' \refines r$\\
+\\
+Rule 2.\\
+Let $\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$.\\
+According to the definition it means $s \refines p; q$ and $r \refines s; q'$\\
+We are to prove that $r \refines p; (q; q')$\\
+$r \refines s; q' \refines^{mon.} (p; q); q' =^{assoc.} p; (q; q')$
+\\
+Rule 3.\\
+Let $p - q \rightarrow s$ and $s - q' \rightarrow r$\\
+According to the definition it means $q; s \refines p; q$ and $q'; r \refines s$\\
+We are to prove that $(q; q'); r \refines p$\\
+$(q; q'); r =^{assoc.} q; (q'; r) \refines^{mon.} q; s \refines p$
+\\
+Rule 4.\\
+Let $p [q] s$ and $s [q'] r$\\
+According to the definition it means $p \refines q; s$ and $s \refines q'; r$\\
+We are to prove that $p \refines (q; q'); r$\\
+$p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
+\\
 \begin{theorem}
-Sequence rules for Hoare+Plotkin or Milner+test imply associativity law.
+Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 \end{theorem}
 
+\begin{proof}
+Hoare + Plotkin.\\
+Let $\{p\}q\{s\}$ and $\{s\}q'\{r\}$ imply $\{p\}q;q'\{r\}$\\
+and\\
+$\left\langle p, q \right\rangle \rightarrow s$ and $\left\langle s, q' \right\rangle \rightarrow r$ imply $\left\langle p, (q; q') \right\rangle \rightarrow r$\\
+According to the definition it means\\
+$p; q \refines s$ and $s; q' \refines r$ imply $p; (q; q') \refines r$\\
+and\\
+$s \refines p; q$ and $r \refines s; q'$ imply $r \refines p; (q; q')$\\
+As $\refines$ is partial order then $p; q = s$ and $s; q' = r$\\
+Also $p; (q; q') = r$.\\
+$p; (q; q') = r = s; q' = (p; q); q'$.
+\end{proof}
 
 \subsection*{Skip}
 
@@ -105,11 +157,11 @@ $\{p\}q\{r\}, \{p\}q'\{r\}$ imply $\{p\}q\sqcup q'\{r\}$
 \end{rul}
 
 \begin{rul}[Nondeterminism for Milner]
-$p \milner{q} r, p \milner{q'} r$ imply $p \milner{q\sqcup q'} r$
+$\milner{p}{q}{r}, \milner{p}{q'}{r}$ imply $\milner{p}{q\sqcup q'}{r}$
 \end{rul}
 
 \begin{rul}[Nondeterminism for Plotkin]
-$p \plotkin{q} r$ or $p \plotkin{q'} r$ implies $p \plotkin{q\sqcup q'} r$
+$\plotkin{p}{q}{r}$ or $\plotkin{p}{q'}{r}$ implies $\plotkin{p}{q\sqcup q'}{r}$
 \end{rul}
 
 \begin{rul}[Nondeterminism for test]
