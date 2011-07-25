@@ -10,6 +10,8 @@
 \newcommand{\refinedby}{\sqsupseteq}
 \newcommand{\eps}{\varepsilon}
 
+\newcommand{\verified}{{\color{green}Verified.}}
+
 % to hide proofs
 %\renewenvironment{proof}{\tiny Proof.}{\qed}
 
@@ -84,7 +86,7 @@ $p [q] s$ and $s [q] r$ imply $p [q; q'] r$
 Associativity law implies all sequence rules.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Hoare.\\
@@ -115,6 +117,8 @@ $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
 \begin{theorem}
 Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
 \end{theorem}
+
+\verified
 
 \begin{proof}
 Hoare + Plotkin.\\
@@ -168,7 +172,7 @@ $p [\eps] p$
 Skip law implies all nullity rules.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 As $\refines$ is reflexive\\
@@ -193,7 +197,7 @@ $p [\eps] p$
 Conjunction of all nullity rules implies skip law.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 $\{p\} \eps \{p\}$ implies $p; \eps \refines p$\\
@@ -223,7 +227,7 @@ $(q \sqcup q'); r = q; r \sqcup q'; r$
 Non-determinism is commutative, increasing and idempotent.
 \end{lemma}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Commutativity is obvious (directly by definition).\\
