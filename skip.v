@@ -46,19 +46,6 @@ rewrite TMP.
 trivial.
 Qed.
 
-Theorem SkipImpliesNullityForTest : SkipLaw -> NullityForTest.
-Proof.
-intro SL.
-unfold NullityForTest.
-unfold TestGeneration.
-intuition.
-assert (TMP : eps ; p = p).
-symmetry.
-apply SL.
-rewrite TMP.
-trivial.
-Qed.
-
 Theorem SkipImpliesNullityForMilner : SkipLaw -> NullityForMilner.
 Proof.
 intro SL.
@@ -72,3 +59,21 @@ rewrite TMP.
 trivial.
 Qed.
 
+Theorem SkipImpliesNullityForTest : SkipLaw -> NullityForTest.
+Proof.
+intro SL.
+unfold NullityForTest.
+unfold TestGeneration.
+intuition.
+assert (TMP : eps ; p = p).
+symmetry.
+apply SL.
+rewrite TMP.
+trivial.
+Qed.
+
+Theorem NullityImpliesSkip:
+  NullityForHoare /\ NullityForPlotkin /\ NullityForTest /\ NullityForMilner -> SkipLaw.
+Proof.
+(* TODO *)
+Qed.
