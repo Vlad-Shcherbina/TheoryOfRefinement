@@ -27,7 +27,7 @@ Notation "A ; B" := (SeqComp A B) (at level 15).
 
 
 Axiom Monotonicity :
-  forall p q p' q' : basics.D,
+  forall p q p' q' : D,
   p ref p' -> q ref q' ->
   (p; q) ref (p'; q').
 
