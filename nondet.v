@@ -50,9 +50,8 @@ Definition HoareNondet :=
   [p]q'[r] ->
   [p](q nondet q')[r].
 
-
-
 Hint Unfold HoareNondet.
+
 
 Theorem LDHN: NondetLeftDistributivity -> HoareNondet.
 Proof.
@@ -64,9 +63,57 @@ auto.
 Qed.
 
 
+Definition PlotkinNondet :=
+  forall p q q' r : D,
+  (PlotkinReduction p q r \/ PlotkinReduction p q' r) -> 
+    PlotkinReduction p (q nondet q') r.
+
+Hint Unfold PlotkinNondet.
+
+Theorem LDPN: NondetLeftDistributivity -> PlotkinNondet.
+Proof.
+intro LD.
+autounfold; autounfold.
+intuition.
+eauto.
+eauto.
+Qed.
 
 
+Definition MilnerNondet :=
+  forall p q q' r : D,
+    (MilnerTransition p q r /\ MilnerTransition p q' r) ->
+      MilnerTransition p (q nondet q') r.
 
-(* TODO: remaining theorems *)
+Hint Unfold MilnerNondet.
+
+Theorem RDMN: NondetRightDistributivity -> MilnerNondet.
+Proof.
+intro RD.
+autounfold; autounfold.
+intuition.
+rewrite RD.
+auto.
+Qed.
+
+
+Definition TestGenerationNondet :=
+  forall p q q' r : D,
+    (TestGeneration p q r \/ TestGeneration p q' r) ->
+      TestGeneration p (q nondet q') r.
+
+Hint Unfold TestGenerationNondet.
+
+Theorem RDTG: NondetRightDistributivity -> TestGenerationNondet.
+Proof.
+intro RD.
+autounfold; autounfold.
+intuition.
+eauto.
+eauto.
+Qed.
+
+
+(* TODO: Theorems 7, 8 *)
 
 

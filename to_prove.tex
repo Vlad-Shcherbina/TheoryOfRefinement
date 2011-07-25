@@ -24,7 +24,7 @@
 
 \newtheorem{axiom}{Axiom}
 \newtheorem{law}{Law}
-\newtheorem{rul}{Rule}  % because 'rule' is already occupied
+\newtheorem{rul}{Rule} % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
@@ -258,7 +258,7 @@ $p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
 
-{\color{green}Verified 1/2.}
+{\color{green}Verified.}
 
 \begin{proof}
 Hoare.\\
@@ -276,6 +276,8 @@ We have to proove $r \refines p; (q \sqcup q')$.\\
 \begin{theorem}
 Right distributivity implies nondeterminism for Milner and testgen.
 \end{theorem}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Milner.\\
@@ -430,7 +432,7 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 
 \begin{definition}
 $wp(q, r) = \textrm{largest} p$ such that $\{p\}q\{r\}$.
-That is, we postulate that $\{wp(q, r)\} q \{r\}$ and 
+That is, we postulate that $\{wp(q, r)\} q \{r\}$ and
 for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 

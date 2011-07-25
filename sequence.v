@@ -1,8 +1,7 @@
 Load basics.
 
-
 Definition AssociativityLaw :=
-  forall p q r : basics.D,
+  forall p q r : D,
   (p; q); r = p; (q; r).
 
 
