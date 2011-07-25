@@ -33,6 +33,29 @@ Axiom Monotonicity :
 
 Hint Resolve Monotonicity.
 
+(* parallel composition *)
+
+Variable ParComp : D -> D -> D.
+Notation "A | B" := (ParComp A B) (at level 16).
+
+Axiom ParCommutativity :
+  forall p q : D,
+  p | q = q | p.
+
+(* TODO move par_assoc if needed only in specific *)
+
+Axiom ParAssociativity :
+  forall p q r : D,
+  (p | q) | r = p | (q | r).
+
+Hint Resolve ParAssociativity.
+
+Axiom ParMonotonicity :
+  forall p q p' q' : D,
+  p ref p' -> q ref q' ->
+  (p | q) ref (p' | q').
+
+Hint Resolve ParMonotonicity.
 
 (* triples *)
 
