@@ -73,7 +73,16 @@ trivial.
 Qed.
 
 Theorem NullityImpliesSkip:
-  NullityForHoare /\ NullityForPlotkin /\ NullityForTest /\ NullityForMilner -> SkipLaw.
+  NullityForHoare /\ NullityForPlotkin /\ NullityForMilner /\ NullityForTest -> SkipLaw.
 Proof.
-(* TODO *)
+unfold NullityForHoare.
+unfold HoareTriple.
+unfold NullityForPlotkin.
+unfold PlotkinReduction.
+unfold NullityForMilner.
+unfold MilnerTransition.
+unfold NullityForTest.
+unfold TestGeneration.
+unfold SkipLaw.
+intuition.
 Qed.
