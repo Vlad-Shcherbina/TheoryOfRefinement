@@ -24,7 +24,7 @@
 
 \newtheorem{axiom}{Axiom}
 \newtheorem{law}{Law}
-\newtheorem{rul}{Rule}  % because 'rule' is already occupied
+\newtheorem{rul}{Rule} % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
@@ -168,6 +168,8 @@ $p [\eps] p$
 Skip law implies all nullity rules.
 \end{theorem}
 
+{\color{green}Verified.}
+
 \begin{proof}
 As $\refines$ is reflexive\\
 $p \refines p$\\
@@ -190,6 +192,8 @@ $p [\eps] p$
 \begin{theorem}
 Conjunction of all nullity rules implies skip law.
 \end{theorem}
+
+{\color{green}Verified.}
 
 \begin{proof}
 $\{p\} \eps \{p\}$ implies $p; \eps \refines p$\\
@@ -430,7 +434,7 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 
 \begin{definition}
 $wp(q, r) = \textrm{largest} p$ such that $\{p\}q\{r\}$.
-That is, we postulate that $\{wp(q, r)\} q \{r\}$ and 
+That is, we postulate that $\{wp(q, r)\} q \{r\}$ and
 for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 
@@ -459,19 +463,22 @@ then $p \refines wp(q, r) = wp(q, (p; q))$.
 \end{proof}
 
 \begin{theorem}
-WP1 and WP2 imply adjointness law.
+WP1 imply adjointness law.
 \end{theorem}
 
 \begin{proof}
-Let $p; q \refines r$\\
-$p \refines wp(q, (p; q))$ means that\\
-$wp(q, (p; q)); q \refines p; q \refines r$\\
-$wp(q, r); q \refines r$ means that\\
-$wp(q, r); q \refines r$
+Let $p; q \refines r$.\\
+We are to prove $p \refines wp(q, r)$.\\
+By definition $wp(q, r) = s$: $s; q \refines r$ and $\forall s' s'; q \refines r \implies s' \refines s$.\\
+For $s' = p$ we have $p; q \refines r \implies p \refines s = wp(q, r)$.\\
+\\
+Let $p \refines wp(q, r)$.\\
+We are to prove $p; q \refines r$.\\
+$q \refines q$ as $\refines$ is reflexive.\\
+By monotonicity of $;$ we have $p; q \refines wp(q, r); q \refines^{WP1} r$.
 \end{proof}
 
-
-%% wp properties 
+%% wp properties are not proved
 
 \begin{theorem}[wp monotonicity]
 $q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
