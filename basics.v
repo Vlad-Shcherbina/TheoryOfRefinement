@@ -4,11 +4,14 @@ Require Import Unicode.Utf8.
 
 Module basics.
 
+
 (* programs, designs, specifications *)
+
 Variable D : Set.
 
 
 (* refinement relationship *)
+
 Variable R : D -> D -> Prop.
 Notation "A 'ref' B" := (R A B) (at level 20).
 Notation "A ⊑ B" := (R A B) (at level 20).
@@ -42,22 +45,12 @@ Axiom ParCommutativity :
   forall p q : D,
   p | q = q | p.
 
-(* TODO move par_assoc if needed only in specific *)
-
-(*
-Axiom ParAssociativity :
-  forall p q r : D,
-  (p | q) | r = p | (q | r).
-
-Hint Resolve ParAssociativity.
-*)
-
 Axiom ParMonotonicity :
   forall p q p' q' : D,
   p ref p' -> q ref q' ->
   (p | q) ref (p' | q').
 
-Hint Resolve ParMonotonicity.
+Hint Resolve ParCommutativity ParMonotonicity.
 
 (* triples *)
 

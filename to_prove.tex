@@ -115,7 +115,8 @@ $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
 \end{proof}
 
 \begin{theorem}
-Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.
+Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.\\
+\color{red}Tony: the law is provable from the conjunction of all of them.
 \end{theorem}
 
 \verified
@@ -262,7 +263,7 @@ $p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Hoare.\\
@@ -281,7 +282,7 @@ We have to proove $r \refines p; (q \sqcup q')$.\\
 Right distributivity implies nondeterminism for Milner and testgen.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Milner.\\
@@ -300,6 +301,8 @@ We have to proove $p \refines (q \sqcup q'); r$.\\
 Nondeterminism rules for Hoare and Plotkin imply left distributivity.
 \end{theorem}
 
+\verified
+
 \begin{proof}
 Let $p; q \refines r$ and $p; q' \refines r$ imply $p; (q \sqcup q') \refines r$\\
 and $r \refines p; q$ (1) or $r \refines p; q'$ (2) imply $r \refines p; (q \sqcup q')$.\\
@@ -313,6 +316,8 @@ Then $r = p; q \sqcup p; q'$.
 \begin{theorem}
 Nondeterminism rules for Milner and testgen imply right distributivity.
 \end{theorem}
+
+\verified
 
 \begin{proof}
 Let $q; r \refines p$ and $q'; r \refines p$ imply $(q \sqcup q'); r \refines p$\\
@@ -411,7 +416,7 @@ $\milner{p}{q}{r}$ and $\milner{p'}{q'}{r'}$ imply $\milner{p | p'}{q | q'}{r | 
 Exchange law implies parallel rules for Hoare and Milner.
 \end{theorem}
 
-Alexander Kogtenkov
+\verified
 
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$.\\
@@ -426,7 +431,7 @@ $(q | q'); (r | r') \refines (q; r) | (q'; r') \refines^{mon.} p | p'$.
 Parallel rule for Hoare implies exchange law.
 \end{theorem}
 
-Alexander Kogtenkov
+\verified
 
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$ imply $(p | p'); (q | q') \refines r | r'$\\
@@ -438,7 +443,7 @@ So $(p | p'); (q | q') \refines (p; q) | (p'; q')$.\\
 Parallel rule for Milner implies exchange law.
 \end{theorem}
 
-Alexander Kogtenkov
+\verified
 
 \begin{proof}
 Let and $q; r \refines p$ and $q'; r' \refines p'$ imply $(q | q'); (r | r') \refines p | p'$.\\
@@ -451,7 +456,7 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 Vlad Shcherbina
 
 \begin{definition}
-$wp(q, r) = \textrm{largest} p$ such that $\{p\}q\{r\}$.
+$wp(q, r) =$ largest $p$ such that $\{p\}q\{r\}$.
 That is, we postulate that $\{wp(q, r)\} q \{r\}$ and
 for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
