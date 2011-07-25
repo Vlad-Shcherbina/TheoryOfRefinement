@@ -1,3 +1,7 @@
+(* -*- coding:utf-8 -*- *)
+
+Require Import Unicode.Utf8.
+
 Module basics.
 
 (* programs, designs, specifications *)
@@ -6,7 +10,8 @@ Variable D : Set.
 
 (* refinement relationship *)
 Variable R : D -> D -> Prop.
-Notation "A 'ref' B" := (R A B) (at level 20, right associativity).
+Notation "A 'ref' B" := (R A B) (at level 20).
+Notation "A ⊑ B" := (R A B) (at level 20).
 
 Axiom Transitivity : forall x y z : D,  R x y /\ R y z -> R x z.
 Axiom Reflexivity : forall x : D, x ref x.
