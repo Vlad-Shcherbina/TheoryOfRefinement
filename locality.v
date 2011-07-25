@@ -51,3 +51,31 @@ apply ParCommutativity.
 exact T1.
 apply ParCommutativity.
 Proof.
+
+Theorem HFLL : HoareFrameRule -> LeftLocalityLaw.
+Proof.
+unfold LeftLocalityLaw, HoareFrameRule, HoareTriple.
+intros.
+assert (TMP : (s|p);q ref (p;q)|s).
+replace (s | p) with (p | s).
+apply H.
+apply Reflexivity.
+apply ParCommutativity.
+replace (s | p; q) with (p; q | s).
+exact TMP.
+apply ParCommutativity.
+Qed.
+
+Theorem MFRL : MilnerFrameRule -> RightLocalityLaw.
+Proof.
+unfold RightLocalityLaw, MilnerFrameRule, MilnerTransition.
+intros.
+assert (TMP : p;(q|s) ref (p;q)|s).
+replace (s | p) with (p | s).
+apply H.
+apply Reflexivity.
+apply ParCommutativity.
+replace (s | p; q) with (p; q | s).
+exact TMP.
+apply ParCommutativity.
+Qed.
