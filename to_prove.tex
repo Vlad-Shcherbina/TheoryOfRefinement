@@ -457,17 +457,20 @@ then $p \refines wp(q, r) = wp(q, (p; q))$.
 \end{proof}
 
 \begin{theorem}
-WP1 and WP2 imply adjointness law.
+WP1 imply adjointness law.
 \end{theorem}
 
 \begin{proof}
-Let $p; q \refines r$\\
-$p \refines wp(q, (p; q))$ means that\\
-$wp(q, (p; q)); q \refines p; q \refines r$\\
-$wp(q, r); q \refines r$ means that\\
-$wp(q, r); q \refines r$
+Let $p; q \refines r$.\\
+We are to prove $p \refines wp(q, r)$.\\
+By definition $wp(q, r) = s$: $s; q \refines r$ and $\forall s' s'; q \refines r \implies s' \refines s$.\\
+For $s' = p$ we have $p; q \refines r \implies p \refines s = wp(q, r)$.\\
+\\
+Let $p \refines wp(q, r)$.\\
+We are to prove $p; q \refines r$.\\
+$q \refines q$ as $\refines$ is reflexive.\\
+By monotonicity of $;$ we have $p; q \refines wp(q, r); q \refines^{WP1} r$.
 \end{proof}
-
 
 %% wp properties 
 
