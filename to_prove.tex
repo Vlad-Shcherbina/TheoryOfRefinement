@@ -300,6 +300,8 @@ We have to proove $p \refines (q \sqcup q'); r$.\\
 Nondeterminism rules for Hoare and Plotkin imply left distributivity.
 \end{theorem}
 
+{\color{green}Verified.}
+
 \begin{proof}
 Let $p; q \refines r$ and $p; q' \refines r$ imply $p; (q \sqcup q') \refines r$\\
 and $r \refines p; q$ (1) or $r \refines p; q'$ (2) imply $r \refines p; (q \sqcup q')$.\\
@@ -313,6 +315,8 @@ Then $r = p; q \sqcup p; q'$.
 \begin{theorem}
 Nondeterminism rules for Milner and testgen imply right distributivity.
 \end{theorem}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Let $q; r \refines p$ and $q'; r \refines p$ imply $(q \sqcup q'); r \refines p$\\
