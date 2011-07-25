@@ -2,3 +2,10 @@
 *.dvi
 *.log
 *.glob
+*.bbl
+*.blg
+*.synctex
+*.tcp
+*.tps
+*.pdf
+*.gz
