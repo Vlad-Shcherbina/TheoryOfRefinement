@@ -351,7 +351,7 @@ $\milner{p}{q}{r}$ implies $\milner{p | s}{q}{r | s}$
 Left locality implies Hoare frame rule.
 \end{theorem}
 
-Pavel Shapkin
+\verified
 
 \begin{proof}
 Let $p; q \refines r$.\\
@@ -363,7 +363,7 @@ $(p | s); q = (s | p); q \refines s | (p ; q) \refines s | r = r | s$
 Right locality implies Milner frame rule.
 \end{theorem}
 
-Pavel Shapkin
+\verified
 
 \begin{proof}
 Let $q; r \refines p$.\\
@@ -375,7 +375,7 @@ $q; (r |s) \refines (q; r) | s \refines p | s$.\\
 Hoare frame rule implies left locality.
 \end{theorem}
 
-Pavel Shapkin
+\verified
 
 \begin{proof}
 Let $p; q \refines r$ implies $(p | s); q \refines r | s$.\\
@@ -387,7 +387,7 @@ So $(p | s); q = (s | p); q \refines (p; q) | s = s | (p; q)$.
 Milner frame rule implies right locality.
 \end{theorem}
 
-Pavel Shapkin
+\verified
 
 \begin{proof}
 Let $q; r \refines p$ implies $q; (r | s) \refines p | s$.\\
