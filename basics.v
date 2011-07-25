@@ -44,11 +44,13 @@ Axiom ParCommutativity :
 
 (* TODO move par_assoc if needed only in specific *)
 
+(*
 Axiom ParAssociativity :
   forall p q r : D,
   (p | q) | r = p | (q | r).
 
 Hint Resolve ParAssociativity.
+*)
 
 Axiom ParMonotonicity :
   forall p q p' q' : D,
