@@ -26,7 +26,7 @@
 
 \newtheorem{axiom}{Axiom}
 \newtheorem{law}{Law}
-\newtheorem{rul}{Rule}  % because 'rule' is already occupied
+\newtheorem{rul}{Rule} % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
 \newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
@@ -262,7 +262,7 @@ $p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
 
-{\color{green}Verified 1/2.}
+{\color{green}Verified.}
 
 \begin{proof}
 Hoare.\\
@@ -280,6 +280,8 @@ We have to proove $r \refines p; (q \sqcup q')$.\\
 \begin{theorem}
 Right distributivity implies nondeterminism for Milner and testgen.
 \end{theorem}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Milner.\\
@@ -382,10 +384,8 @@ So $q; (r | s) \refines (q; r) | s$.
 
 \subsection*{Separation logic}
 
-\begin{axiom}[Commutativity and associativity of $|$]
+\begin{axiom}[Commutativity, associativity and monotonicity of $|$]
 \end{axiom}
-
-Do we need it?
 
 \begin{law}[Exchange]
 $(p|p');(q|q') \refines (p;q)|(p';q')$
@@ -406,10 +406,10 @@ Exchange law implies parallel rules for Hoare and Milner.
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$.\\
 We are to prove $(p | p'); (q | q') \refines r | r'$.\\
-$(p | p'); (q | q') \refines (p; q) | (p'; q') \refines r | r'$.\\
+$(p | p'); (q | q') \refines (p; q) | (p'; q') \refines^{mon.} r | r'$.\\
 Let $q; r \refines p$ and $q'; r' \refines p'$.\\
 We are to prove $(q | q'); (r | r') \refines p | p'$.\\
-$(q | q'); (r | r') \refines (q; r) | (q'; r') \refines p | p'$.
+$(q | q'); (r | r') \refines (q; r) | (q'; r') \refines^{mon.} p | p'$.
 \end{proof}
 
 \begin{theorem}
@@ -436,7 +436,7 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 
 \begin{definition}
 $wp(q, r) = \textrm{largest} p$ such that $\{p\}q\{r\}$.
-That is, we postulate that $\{wp(q, r)\} q \{r\}$ and 
+That is, we postulate that $\{wp(q, r)\} q \{r\}$ and
 for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 
@@ -480,7 +480,7 @@ $q \refines q$ as $\refines$ is reflexive.\\
 By monotonicity of $;$ we have $p; q \refines wp(q, r); q \refines^{WP1} r$.
 \end{proof}
 
-%% wp properties are not proved
+%% wp properties
 
 \begin{theorem}[wp monotonicity]
 $q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
@@ -494,16 +494,19 @@ $wp((q;q'), r) \refines wp(q, wp(q', r))$
 \end{theorem}
 
 \begin{proof}
-$wp((q; q'), r); (q; q') \refines r$\\
-$wp(q, wp(q', r)); q \refines wp(q'; r)$\\
-$wp(q'; r); q' \refines r$
 \end{proof}
 
 \begin{theorem}
-$wp(q, r) \refines wp((q;s), (r;s))$
+$wp(q, r) \refines wp((q; s), (r; s))$
 \end{theorem}
 
 \begin{proof}
+By definition $wp((q; s), (r; s)) = t$: $t; (q; s) \refines r; s$ and $\forall t'$ $t'; (q; s) \refines r; s \implies t' \refines t$.\\
+By WP1 $wp(q, r); q \refines r$.\\
+$s \refines s$ as $\refines$ is reflexive.\\
+By monotonicity $(wp(q, r); q); s \refines r; s$.\\
+By associativity $wp(q, r); (q; s) \refines r; s$.\\
+For $t' = wp(q, r)$ we have $wp(q, r) \refines wp((q; s), (r; s))$.
 \end{proof}
 
 \end{document}
