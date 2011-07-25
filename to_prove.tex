@@ -263,7 +263,7 @@ $p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Hoare.\\
@@ -282,7 +282,7 @@ We have to proove $r \refines p; (q \sqcup q')$.\\
 Right distributivity implies nondeterminism for Milner and testgen.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Milner.\\
@@ -301,7 +301,7 @@ We have to proove $p \refines (q \sqcup q'); r$.\\
 Nondeterminism rules for Hoare and Plotkin imply left distributivity.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Let $p; q \refines r$ and $p; q' \refines r$ imply $p; (q \sqcup q') \refines r$\\
@@ -317,7 +317,7 @@ Then $r = p; q \sqcup p; q'$.
 Nondeterminism rules for Milner and testgen imply right distributivity.
 \end{theorem}
 
-{\color{green}Verified.}
+\verified
 
 \begin{proof}
 Let $q; r \refines p$ and $q'; r \refines p$ imply $(q \sqcup q'); r \refines p$\\
@@ -416,7 +416,7 @@ $\milner{p}{q}{r}$ and $\milner{p'}{q'}{r'}$ imply $\milner{p | p'}{q | q'}{r | 
 Exchange law implies parallel rules for Hoare and Milner.
 \end{theorem}
 
-Alexander Kogtenkov
+\verified
 
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$.\\
@@ -431,7 +431,7 @@ $(q | q'); (r | r') \refines (q; r) | (q'; r') \refines^{mon.} p | p'$.
 Parallel rule for Hoare implies exchange law.
 \end{theorem}
 
-Alexander Kogtenkov
+\verified
 
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$ imply $(p | p'); (q | q') \refines r | r'$\\
@@ -443,7 +443,7 @@ So $(p | p'); (q | q') \refines (p; q) | (p'; q')$.\\
 Parallel rule for Milner implies exchange law.
 \end{theorem}
 
-Alexander Kogtenkov
+\verified
 
 \begin{proof}
 Let and $q; r \refines p$ and $q'; r' \refines p'$ imply $(q | q'); (r | r') \refines p | p'$.\\
