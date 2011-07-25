@@ -346,6 +346,8 @@ $\milner{p}{q}{r}$ implies $\milner{p | s}{q}{r | s}$
 Left locality implies Hoare frame rule.
 \end{theorem}
 
+Pavel Shapkin
+
 \begin{proof}
 Let $p; q \refines r$.\\
 We are to prove $(p | s); q \refines r | s$.\\
@@ -355,6 +357,8 @@ $(p | s); q = (s | p); q \refines s | (p ; q) \refines s | r = r | s$
 \begin{theorem}
 Right locality implies Milner frame rule.
 \end{theorem}
+
+Pavel Shapkin
 
 \begin{proof}
 Let $q; r \refines p$.\\
@@ -366,6 +370,8 @@ $q; (r |s) \refines (q; r) | s \refines p | s$.\\
 Hoare frame rule implies left locality.
 \end{theorem}
 
+Pavel Shapkin
+
 \begin{proof}
 Let $p; q \refines r$ implies $(p | s); q \refines r | s$.\\
 Let $r = (p; q)$ then the premise of the rule is true.\\
@@ -375,6 +381,8 @@ So $(p | s); q = (s | p); q \refines (p; q) | s = s | (p; q)$.
 \begin{theorem}
 Milner frame rule implies right locality.
 \end{theorem}
+
+Pavel Shapkin
 
 \begin{proof}
 Let $q; r \refines p$ implies $q; (r | s) \refines p | s$.\\
@@ -403,6 +411,8 @@ $\milner{p}{q}{r}$ and $\milner{p'}{q'}{r'}$ imply $\milner{p | p'}{q | q'}{r | 
 Exchange law implies parallel rules for Hoare and Milner.
 \end{theorem}
 
+Alexander Kogtenkov
+
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$.\\
 We are to prove $(p | p'); (q | q') \refines r | r'$.\\
@@ -416,6 +426,8 @@ $(q | q'); (r | r') \refines (q; r) | (q'; r') \refines^{mon.} p | p'$.
 Parallel rule for Hoare implies exchange law.
 \end{theorem}
 
+Alexander Kogtenkov
+
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$ imply $(p | p'); (q | q') \refines r | r'$\\
 Let $r = (p; q)$ and $r' = (p'; q')$ then the premise of the rules is true.\\
@@ -426,6 +438,8 @@ So $(p | p'); (q | q') \refines (p; q) | (p'; q')$.\\
 Parallel rule for Milner implies exchange law.
 \end{theorem}
 
+Alexander Kogtenkov
+
 \begin{proof}
 Let and $q; r \refines p$ and $q'; r' \refines p'$ imply $(q | q'); (r | r') \refines p | p'$.\\
 Let $p = (q; r)$ and $p' = (q'; r')$ then the premise of the rules is true.\\
@@ -433,6 +447,8 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 \end{proof}
 
 \subsection*{Weakest preconditions}
+
+Vlad Shcherbina
 
 \begin{definition}
 $wp(q, r) = \textrm{largest} p$ such that $\{p\}q\{r\}$.
