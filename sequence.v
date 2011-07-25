@@ -55,15 +55,40 @@ rewrite Assoc.
 eauto.
 Qed.
 
-
-
-(* TODO for other triples*)
-
-
-
-Theorem SHA : SequenceRule HoareTriple -> AssociativityLaw.
+Theorem SHSPA : SequenceRule HoareTriple /\ SequenceRule PlotkinReduction ->
+ AssociativityLaw.
 Proof.
-unfold SequenceRule, HoareTriple.
+unfold SequenceRule, HoareTriple, PlotkinReduction, AssociativityLaw.
+intros.
+elim H.
+intros.
+intuition.
+clear H2.
+clear H3.
+apply AntiSymmetry.
+apply H1 with (p; q).
+apply Reflexivity.
+apply Reflexivity.
+apply H0 with (p; q).
+apply Reflexivity.
+apply Reflexivity.
+Qed.
 
-(* TODO *)
-
+Theorem SMSTA : SequenceRule MilnerTransition /\ SequenceRule TestGeneration ->
+ AssociativityLaw.
+Proof.
+unfold SequenceRule, TestGeneration, MilnerTransition, AssociativityLaw.
+intros.
+elim H.
+intros.
+intuition.
+clear H2.
+clear H3.
+apply AntiSymmetry.
+apply H0 with (q; r).
+apply Reflexivity.
+apply Reflexivity.
+apply H1 with (q; r).
+apply Reflexivity.
+apply Reflexivity.
+Qed.
