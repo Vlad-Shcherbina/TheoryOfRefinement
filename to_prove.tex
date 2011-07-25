@@ -357,8 +357,19 @@ Hoare frame rule implies left locality.
 \end{theorem}
 
 \begin{proof}
-Let $p; q \refines r$ implies $(p | s); q = (s | p); q \refines r | s = s | r$.\\
-$s | (p; q) \refines s | r = r | s$\\
+Let $p; q \refines r$ implies $(p | s); q \refines r | s$.\\
+Let $r = (p; q)$ then the premise of the rule is true.\\
+So $(p | s); q = (s | p); q \refines (p; q) | s = s | (p; q)$.
+\end{proof}
+
+\begin{theorem}
+Milner frame rule implies right locality.
+\end{theorem}
+
+\begin{proof}
+Let $q; r \refines p$ implies $q; (r | s) \refines p | s$.\\
+Let $p = (q; r)$ then the premise of the rule is true.\\
+So $q; (r | s) \refines (q; r) | s$.
 \end{proof}
 
 \subsection*{Separation logic}
@@ -387,7 +398,7 @@ Exchange law implies parallel rules for Hoare and Milner.
 \begin{proof}
 Let $p; q \refines r$ and $p'; q' \refines r'$.\\
 We are to prove $(p | p'); (q | q') \refines r | r'$.\\
-$(p | p'); (q | q') \refines (p; q) | (p'; q') \refines r | r'$.
+$(p | p'); (q | q') \refines (p; q) | (p'; q') \refines r | r'$.\\
 Let $q; r \refines p$ and $q'; r' \refines p'$.\\
 We are to prove $(q | q'); (r | r') \refines p | p'$.\\
 $(q | q'); (r | r') \refines (q; r) | (q'; r') \refines p | p'$.
@@ -461,15 +472,27 @@ $wp(q, r); q \refines r$
 %% wp properties 
 
 \begin{theorem}[wp monotonicity]
-$q_1 \refines q, r \refines r'$ imply $wp(q, r) \refines wp(q_1, r')$
+$q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
 \end{theorem}
 
-\begin{theorem}[stepwise wp]
+\begin{proof}
+\end{proof}
+
+\begin{theorem}[Stepwise wp]
 $wp((q;q'), r) \refines wp(q, wp(q', r))$
 \end{theorem}
+
+\begin{proof}
+$wp((q; q'), r); (q; q') \refines r$\\
+$wp(q, wp(q', r)); q \refines wp(q'; r)$\\
+$wp(q'; r); q' \refines r$
+\end{proof}
 
 \begin{theorem}
 $wp(q, r) \refines wp((q;s), (r;s))$
 \end{theorem}
+
+\begin{proof}
+\end{proof}
 
 \end{document}
