@@ -2,12 +2,16 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{color}
 
 \begin{document}
 
 \newcommand{\refines}{\sqsubseteq}
 \newcommand{\refinedby}{\sqsupseteq}
 \newcommand{\eps}{\varepsilon}
+
+% to hide proofs
+%\renewenvironment{proof}{\tiny Proof.}{\qed}
 
 % pretty arrows
 %\newcommand{\plotkin}[3]{#1\stackrel{#2}{\rightarrow}#3}
@@ -22,6 +26,7 @@
 \newtheorem{law}{Law}
 \newtheorem{rul}{Rule}  % because 'rule' is already occupied
 \newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
 \newtheorem{definition}{Definition}
 
 Laws and rules are mere shortcuts for some statements.
@@ -78,6 +83,8 @@ $p [q] s$ and $s [q] r$ imply $p [q; q'] r$
 \begin{theorem}
 Associativity law implies all sequence rules.
 \end{theorem}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Hoare.\\
@@ -208,9 +215,11 @@ $p; (q \sqcup q') = p; q \sqcup p; q'$
 $(q \sqcup q'); r = q; r \sqcup q'; r$
 \end{law}
 
-\begin{theorem}
+\begin{lemma}
 Non-determinism is commutative, increasing and idempotent.
-\end{theorem}
+\end{lemma}
+
+{\color{green}Verified.}
 
 \begin{proof}
 Commutativity is obvious (directly by definition).\\
@@ -244,6 +253,8 @@ $p [q] r$ or $p [q'] r$ imply $p [q \sqcup q'] r$
 \begin{theorem}
 Left distributivity implies nondeterminism for Hoare and Plotkin.
 \end{theorem}
+
+{\color{green}Verified 1/2.}
 
 \begin{proof}
 Hoare.\\
@@ -352,7 +363,7 @@ $s | (p; q) \refines s | r = r | s$\\
 
 \subsection*{Separation logic}
 
-\begin{axiom}[commutativity and associativity of $|$]
+\begin{axiom}[Commutativity and associativity of $|$]
 \end{axiom}
 
 Do we need it?
@@ -366,47 +377,85 @@ $\{p\}q\{r\}$ and $\{p'\}q'\{r'\}$ imply $\{p|p'\} q|q' \{r|r'\}$
 \end{rul}
 
 \begin{rul}[Parallel for Milner]
-Likewise.
+$\milner{p}{q}{r}$ and $\milner{p'}{q'}{r'}$ imply $\milner{p | p'}{q | q'}{r | r'}$.
 \end{rul}
 
 \begin{theorem}
 Exchange law implies parallel rules for Hoare and Milner.
 \end{theorem}
 
+\begin{proof}
+Let $p; q \refines r$ and $p'; q' \refines r'$.\\
+We are to prove $(p | p'); (q | q') \refines r | r'$.\\
+$(p | p'); (q | q') \refines (p; q) | (p'; q') \refines r | r'$.
+Let $q; r \refines p$ and $q'; r' \refines p'$.\\
+We are to prove $(q | q'); (r | r') \refines p | p'$.\\
+$(q | q'); (r | r') \refines (q; r) | (q'; r') \refines p | p'$.
+\end{proof}
+
 \begin{theorem}
-Parallel rules for Hoare and Milner imply exchange law.
+Parallel rule for Hoare implies exchange law.
 \end{theorem}
 
+\begin{proof}
+Let $p; q \refines r$ and $p'; q' \refines r'$ imply $(p | p'); (q | q') \refines r | r'$\\
+Let $r = (p; q)$ and $r' = (p'; q')$ then the premise of the rules is true.\\
+So $(p | p'); (q | q') \refines (p; q) | (p'; q')$.\\
+\end{proof}
+
+\begin{theorem}
+Parallel rule for Milner implies exchange law.
+\end{theorem}
+
+\begin{proof}
+Let and $q; r \refines p$ and $q'; r' \refines p'$ imply $(q | q'); (r | r') \refines p | p'$.\\
+Let $p = (q; r)$ and $p' = (q'; r')$ then the premise of the rules is true.\\
+So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
+\end{proof}
 
 \subsection*{Weakest preconditions}
 
 \begin{definition}
-$wp(q, r) = \textrm{largest } p$ such that $\{p\}q\{r\}$.
+$wp(q, r) = \textrm{largest} p$ such that $\{p\}q\{r\}$.
 That is, we postulate that $\{wp(q, r)\} q \{r\}$ and 
 for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 
-\begin{law}[adjointness]
-$p\refines wp(q, r)$ iff $p;q \refines r$
+\begin{law}[Adjointness]
+$p \refines wp(q, r)$ iff $p; q \refines r$
 \end{law}
-
-Do we need  definition (because it seems that law is enough)?
 
 \begin{rul}[WP1]
 $wp(q, r); q \refines r$
 \end{rul}
 
 \begin{rul}[WP2]
-$p \refines wp(q, (p;q))$
+$p \refines wp(q, (p; q))$
 \end{rul}
 
 \begin{theorem}
 Adjointness law implies WP1 and WP2.
 \end{theorem}
 
+\begin{proof}
+By definition $wp(q, r); q \refines r$.\\
+\\
+Let $r = (p; q)$\\
+$p; q \refines p; q$\\
+then $p \refines wp(q, r) = wp(q, (p; q))$.
+\end{proof}
+
 \begin{theorem}
 WP1 and WP2 imply adjointness law.
 \end{theorem}
+
+\begin{proof}
+Let $p; q \refines r$\\
+$p \refines wp(q, (p; q))$ means that\\
+$wp(q, (p; q)); q \refines p; q \refines r$\\
+$wp(q, r); q \refines r$ means that\\
+$wp(q, r); q \refines r$
+\end{proof}
 
 
 %% wp properties 

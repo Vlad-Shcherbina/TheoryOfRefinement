@@ -13,38 +13,60 @@ This axiom together with totality of nondet operation
 automatically implies that R is semilattice
 *)
 
-Hint Resolve NondetDefinition.
+
+Hint Extern 10 (_ ref _) => apply NondetDefinition.
+(* so when we see 'x ref y' we try to apply NondetDefinition *)
 
 
-
-Lemma NondetIdempotent:
+Lemma NondetIdempotency:
   forall p : D, p nondet p = p.
 Proof.
-intuition.
-assert (p nondet p ref p).
-  apply NondetDefinition with (p := p) (q := p).
-  auto.
-assert (p ref p nondet p).
-  apply NondetDefinition with (p := p) (q := p).
-  auto.
+auto.
 Qed.
 
+Hint Rewrite NondetIdempotency.
 
 Lemma NondetCommutativity:
   forall p q : D, p nondet q = q nondet p.
 Proof.
-intuition.
-assert (p nondet q ref q nondet p).
-  apply NondetDefinition with (p:=p) (q:=q).
-Admitted.
+auto.
+Qed.
 
 
-Lemma NondetIncreasing:
-  forall p q : D, p ref p nondet q.
+Definition NondetLeftDistributivity :=
+  forall p q q' : D,
+  p; (q nondet q') = p;q nondet p;q'.
+
+Definition NondetRightDistributivity :=
+  forall q q' r : D,
+  (q nondet q'); r = q;r nondet q';r.
+
+Hint Unfold NondetLeftDistributivity NondetRightDistributivity.
+
+
+Definition HoareNondet :=
+  forall p q q' r : D,
+  [p]q[r] ->
+  [p]q'[r] ->
+  [p](q nondet q')[r].
+
+
+
+Hint Unfold HoareNondet.
+
+Theorem LDHN: NondetLeftDistributivity -> HoareNondet.
 Proof.
-(* TODO *)
-Admitted.
+intro LD.
+autounfold; autounfold.
+intuition.
+rewrite LD.
+auto.
+Qed.
 
-*)
+
+
+
+
+(* TODO: remaining theorems *)
 
 
