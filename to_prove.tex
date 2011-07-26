@@ -13,15 +13,15 @@
 \newcommand{\verified}{{\color{green}Verified.}}
 
 % to hide proofs
-%\renewenvironment{proof}{\tiny Proof.}{\qed}
+\renewenvironment{proof}{\tiny Proof.}{\qed}
 
 % pretty arrows
 %\newcommand{\plotkin}[3]{#1\stackrel{#2}{\rightarrow}#3}
-%\newcommand{\milner}[3]{#1\stackrel{#2}{\leadsto}#3}
+\newcommand{\milner}[3]{#1\stackrel{#2}{\rightarrow}#3}
 
 % ugly arrows
 \newcommand{\plotkin}[3]{\left< #1, #2 \right> \rightarrow #3}
-\newcommand{\milner}[3]{#1-#2\rightarrow #3}
+%\newcommand{\milner}[3]{#1-#2\rightarrow #3}
 
 
 \newtheorem{axiom}{Axiom}
@@ -452,8 +452,6 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 \end{proof}
 
 \subsection*{Weakest preconditions}
-
-Vlad Shcherbina
 
 \begin{definition}
 $wp(q, r) =$ largest $p$ such that $\{p\}q\{r\}$.
