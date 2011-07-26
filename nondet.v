@@ -113,7 +113,52 @@ eauto.
 eauto.
 Qed.
 
+Theorem HNPNLD: (HoareNondet /\ PlotkinNondet) -> NondetLeftDistributivity.
+Proof.
+unfold HoareNondet, PlotkinNondet, NondetLeftDistributivity.
+autounfold.
+intuition.
+Qed.
 
-(* TODO: Theorems 7, 8 *)
+Theorem MNTNRD: (MilnerNondet /\ TestGenerationNondet) -> NondetRightDistributivity.
+Proof.
+unfold MilnerNondet, TestGenerationNondet, NondetRightDistributivity.
+autounfold.
+intuition.
+Qed.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

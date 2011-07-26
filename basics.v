@@ -4,11 +4,14 @@ Require Import Unicode.Utf8.
 
 Module basics.
 
+
 (* programs, designs, specifications *)
+
 Variable D : Set.
 
 
 (* refinement relationship *)
+
 Variable R : D -> D -> Prop.
 Notation "A 'ref' B" := (R A B) (at level 20).
 Notation "A ⊑ B" := (R A B) (at level 20).
@@ -33,6 +36,21 @@ Axiom Monotonicity :
 
 Hint Resolve Monotonicity.
 
+(* parallel composition *)
+
+Variable ParComp : D -> D -> D.
+Notation "A | B" := (ParComp A B) (at level 16).
+
+Axiom ParCommutativity :
+  forall p q : D,
+  p | q = q | p.
+
+Axiom ParMonotonicity :
+  forall p q p' q' : D,
+  p ref p' -> q ref q' ->
+  (p | q) ref (p' | q').
+
+Hint Resolve ParCommutativity ParMonotonicity.
 
 (* triples *)
 

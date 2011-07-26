@@ -1,24 +1,12 @@
 Load basics.
 
-(* parallel composition *)
-
-Variable ParComp : D -> D -> D.
-Notation "A | B" := (ParComp A B) (at level 16).
-
-Axiom ParCommutativity :
-  forall p q : D,
-  p | q = q | p.
 
 Axiom ParAssociativity :
   forall p q r : D,
   (p | q) | r = p | (q | r).
 
-Axiom ParMonotonicity :
-  forall p q p' q' : D,
-  p ref p' -> q ref q' ->
-  (p | q) ref (p' | q').
+Hint Resolve ParAssociativity.
 
-Hint Resolve ParCommutativity ParAssociativity ParMonotonicity.
 
 Definition ExchangeLaw :=
   forall p p' q q' : D,
@@ -77,4 +65,3 @@ intuition.
 apply PM.
 auto.
 Qed.
-
