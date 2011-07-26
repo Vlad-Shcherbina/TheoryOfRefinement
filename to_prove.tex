@@ -506,13 +506,23 @@ $q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
 \end{theorem}
 
 \begin{proof}
+I'm sorry, I can't prove it.
 \end{proof}
 
 \begin{theorem}[Stepwise wp]
-$wp((q;q'), r) \refines wp(q, wp(q', r))$
+$wp((q; q'), r) \refinedby wp(q, wp(q', r))$\\
+$\color{red} Tony: wp((q; q'), r) \refines wp(q, wp(q', r))$
 \end{theorem}
 
 \begin{proof}
+By WP1 $wp(q, wp(q', r)); q \refines wp(q' r)$\\
+$q' \refines q'$ as $\refines$ is reflexive.\\
+By monotonicity and associativity $wp(q, wp(q', r)); (q; q') \refines wp(q' r); q'$\\
+By WP1 $wp(q' r); q' \refines r$.\\
+By transitivity $wp(q, wp(q', r)); (q; q') \refines r$.\\
+According to the definition $wp((q; q'), r) = t$ such that $t; (q; q') \refines r$ and $\forall t'$ $t'; (q; q') \refines r \implies t' \refines t$.\\
+So for $t' = wp(q, wp(q', r))$ we have $wp(q, wp(q', r)) \refines wp(q, wp(q', r))$ which is the same for\\
+$wp(q, wp(q', r)) \refinedby wp(q, wp(q', r))$.
 \end{proof}
 
 \begin{theorem}
