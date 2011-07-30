@@ -13,7 +13,16 @@ Definition AdjointnessLaw :=
   p ref wp q r <-> p;q ref r.
 
 
-Hint Unfold WP_definition AdjointnessLaw.
+Definition WP1 :=
+  forall p q r : D,
+  (wp q r); q ref r.
+
+Definition WP2 :=
+  forall p q r : D,
+  p ref wp q (p;q).
+
+
+Hint Unfold WP_definition AdjointnessLaw WP1 WP2.
 
 Theorem ALWPD : AdjointnessLaw -> WP_definition.
 Proof.
@@ -41,8 +50,19 @@ Qed.
 
 
 
-(*
-Definition WP1 :=
-  forall p q r : D,
-  p ref wp q r -> 
-*)
+
+
+Theorem WPAWP12 : AdjointnessLaw -> WP1 /\ WP2.
+Proof.
+intro AL.
+autounfold.
+intuition.
+  apply ALWPD.
+  assumption.
+
+  apply ALWPD.
+    assumption.
+    auto.
+Qed.
+
+
