@@ -3,6 +3,7 @@
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{color}
+\usepackage{verbatim} % for comments
 
 \begin{document}
 
@@ -492,17 +493,20 @@ Adjointness law implies WP1 and WP2.
 \verified
 
 \begin{proof}
-By definition $wp(q, r); q \refines r$.\\
+(WP1) By definition $wp(q, r); q \refines r$.\\
 \\
-Let $r = (p; q)$\\
+(WP2) Let $r = (p; q)$\\
 $p; q \refines p; q$\\
 then $p \refines wp(q, r) = wp(q, (p; q))$.
 \end{proof}
 
 \begin{theorem}
-WP1 imply adjointness law.
+WP1 together with Wp2 imply adjointness law.
 \end{theorem}
 
+\verified 1/2
+
+\begin{comment}
 \begin{proof}
 Let $p; q \refines r$.\\
 We are to prove $p \refines wp(q, r)$.\\
@@ -514,16 +518,17 @@ We are to prove $p; q \refines r$.\\
 $q \refines q$ as $\refines$ is reflexive.\\
 By monotonicity of $;$ we have $p; q \refines wp(q, r); q \refines^{WP1} r$.
 \end{proof}
+\end{comment}
 
 %% wp properties
 
 \begin{theorem}[wp monotonicity]
+Assumping traditional definition of $wp$,
 $q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
 \end{theorem}
 
-\begin{proof}
-I'm sorry, I can't prove it.
-\end{proof}
+\verified
+
 
 \begin{theorem}[Stepwise wp]
 $wp((q; q'), r) \refinedby wp(q, wp(q', r))$\\

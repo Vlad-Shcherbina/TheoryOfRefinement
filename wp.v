@@ -24,6 +24,7 @@ Definition WP2 :=
 
 Hint Unfold WP_definition AdjointnessLaw WP1 WP2.
 
+
 Theorem ALWPD : AdjointnessLaw -> WP_definition.
 Proof.
 intro AL.
@@ -49,9 +50,6 @@ trivial.
 Qed.
 
 
-
-
-
 Theorem WPAWP12 : AdjointnessLaw -> WP1 /\ WP2.
 Proof.
 intro AL.
@@ -65,4 +63,28 @@ intuition.
     auto.
 Qed.
 
+Theorem WP12WPA : WP1 /\ WP2 -> AdjointnessLaw.
+Proof.
+intuition.
+autounfold.
+intuition.
+eauto.
+admit. (* TODO!!!!!!!!!!!! *)
+Qed.
 
+
+Theorem WPMon : 
+  WP_definition ->
+  forall q q' r r' : D,
+  q' ref q -> r ref r' -> wp q r ref wp q' r'.
+Proof.
+intro WPD.
+intuition.
+apply WPDAL.
+assumption.
+apply Transitivity with (r).
+intuition.
+apply Transitivity with (wp q r; q).
+intuition.
+apply WPD.
+Qed.
