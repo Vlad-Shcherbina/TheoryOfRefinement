@@ -453,10 +453,12 @@ So $(q | q'); (r | r') \refines (q; r) | (q'; r')$.\\
 
 \subsection*{Weakest preconditions}
 
-\begin{definition}
+$wp$ is just a functional symbol.
+
+\begin{definition}[traditional definition of $wp$]
 $wp(q, r) =$ largest $p$ such that $\{p\}q\{r\}$.
-That is, we postulate that $\{wp(q, r)\} q \{r\}$ and
-for all $p'$ $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
+That is, $\{wp(q, r)\} q \{r\}$ and
+for all $p'$, $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 
 \begin{law}[Adjointness]
@@ -470,6 +472,18 @@ $wp(q, r); q \refines r$
 \begin{rul}[WP2]
 $p \refines wp(q, (p; q))$
 \end{rul}
+
+\begin{theorem}
+Adjointness law implies traditional definition of $wp$.
+\end{theorem}
+
+\verified
+
+\begin{theorem}
+Traditional definition of $wp$ implies adjointness law.
+\end{theorem}
+
+\verified
 
 \begin{theorem}
 Adjointness law implies WP1 and WP2.
