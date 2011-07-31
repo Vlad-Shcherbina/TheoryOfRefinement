@@ -1,5 +1,6 @@
 Load basics.
 
+
 Variable wp : D -> D -> D.
 
 Definition WP_definition :=
@@ -87,4 +88,25 @@ intuition.
 apply Transitivity with (wp q r; q).
 intuition.
 apply WPD.
+Qed.
+
+
+Theorem StepWiseWP :
+  AssociativityLaw ->
+  WP_definition ->
+  forall q q' r : D,
+  wp q (wp q' r) ref wp (q; q') r.
+Proof.
+intro Assoc.
+intro WPD.
+intuition.
+assert (wp1:WP1).
+  apply WPAWP12.
+  apply WPDAL.
+  assumption.
+apply WPD.
+autounfold.
+rewrite <- Assoc.
+apply Transitivity with ((wp q' r); q').
+auto.
 Qed.
