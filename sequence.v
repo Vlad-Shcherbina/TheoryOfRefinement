@@ -1,9 +1,5 @@
 Load basics.
 
-Definition AssociativityLaw :=
-  forall p q r : D,
-  (p; q); r = p; (q; r).
-
 
 Definition SequenceRule (triple : D->D->D->Prop) :=
   forall p q s q' r : D,
@@ -12,6 +8,7 @@ Definition SequenceRule (triple : D->D->D->Prop) :=
   triple p (q;q') r.
 
 Hint Unfold  SequenceRule.
+
 
 Theorem ASH : AssociativityLaw -> SequenceRule HoareTriple.
 Proof.

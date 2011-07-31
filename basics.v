@@ -66,5 +66,12 @@ Definition TestGeneration (p q r : D) := p ref q; r.
 Hint Unfold HoareTriple PlotkinReduction MilnerTransition TestGeneration.
 
 
+
+Definition AssociativityLaw :=
+  forall p q r : D,
+  (p; q); r = p; (q; r).
+
+
+
 End basics.
 Export basics.
