@@ -462,6 +462,8 @@ That is, $\{wp(q, r)\} q \{r\}$ and
 for all $p'$, $\{p'\}q\{r\}$ implies $p' \refines wp(q, r)$.
 \end{definition}
 
+This definition is not assumed unless stated explicitly!
+
 \begin{law}[Adjointness]
 $p \refines wp(q, r)$ iff $p; q \refines r$
 \end{law}
@@ -523,7 +525,7 @@ By monotonicity of $;$ we have $p; q \refines wp(q, r); q \refines^{WP1} r$.
 %% wp properties
 
 \begin{theorem}[wp monotonicity]
-Assumping traditional definition of $wp$,
+Assuming traditional definition of $wp$,
 $q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
 \end{theorem}
 
@@ -550,6 +552,9 @@ $wp(q, wp(q', r)) \refinedby wp(q, wp(q', r))$.
 \end{proof}
 
 \begin{theorem}
+Assuming 
+traditional definition of $wp$
+and associativity of sequential composition,
 $wp(q, r) \refines wp((q; s), (r; s))$
 \end{theorem}
 

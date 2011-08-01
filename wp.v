@@ -110,3 +110,21 @@ rewrite <- Assoc.
 apply Transitivity with ((wp q' r); q').
 auto.
 Qed.
+
+
+Theorem WP_Seq :
+  AssociativityLaw ->
+  WP_definition ->
+  forall q r s : D,
+  wp q r ref wp (q;s) (r;s).
+Proof.
+intro Assoc.
+intro WPD.
+intuition.
+apply WPDAL.
+assumption.
+rewrite <- Assoc.
+apply Monotonicity.
+  apply WPD.
+  trivial.
+Qed.
