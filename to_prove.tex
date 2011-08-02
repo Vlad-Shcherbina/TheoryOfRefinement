@@ -14,7 +14,7 @@
 \newcommand{\verified}{{\color{green}Verified.}}
 
 % to hide proofs
-\renewenvironment{proof}{\tiny Proof.}{\qed}
+\renewenvironment{proof}{\small Proof.}{\qed}
 
 % pretty arrows
 %\newcommand{\plotkin}[3]{#1\stackrel{#2}{\rightarrow}#3}
@@ -117,7 +117,7 @@ $p \refines q; s \refines^{mon.} q; (q'; r) =^{assoc.} (q; q'); r$
 
 \begin{theorem}
 Sequence rules for Hoare + Plotkin or Milner + testgen imply associativity law.\\
-\color{red}Tony: the law is provable from the conjunction of all of them.
+\color{red}Slides: the law is provable from the conjunction of all of them.
 \end{theorem}
 
 \verified
@@ -506,7 +506,7 @@ then $p \refines wp(q, r) = wp(q, (p; q))$.
 WP1 together with Wp2 imply adjointness law.
 \end{theorem}
 
-\verified 1/2
+NOT PROVED
 
 \begin{comment}
 \begin{proof}
@@ -535,7 +535,7 @@ $q' \refines q$ and $r \refines r'$ imply $wp(q, r) \refines wp(q', r')$
 \begin{theorem}[Stepwise wp]
 Sequence composition associativity law and traditional definition of wp imply
 $wp((q; q'), r) \refinedby wp(q, wp(q', r))$\\
-{\color{red} Tony slides: $wp((q; q'), r) \refines wp(q, wp(q', r))$}
+{\color{red} Slides: $wp((q; q'), r) \refines wp(q, wp(q', r))$}
 \end{theorem}
 
 \verified
@@ -557,6 +557,8 @@ traditional definition of $wp$
 and associativity of sequential composition,
 $wp(q, r) \refines wp((q; s), (r; s))$
 \end{theorem}
+
+\verified
 
 \begin{proof}
 By definition $wp((q; s), (r; s)) = t$: $t; (q; s) \refines r; s$ and $\forall t'$ $t'; (q; s) \refines r; s \implies t' \refines t$.\\

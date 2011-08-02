@@ -70,6 +70,9 @@ intuition.
 autounfold.
 intuition.
 eauto.
+apply Transitivity with (wp q (p; q)).
+intuition.
+
 admit. (* TODO!!!!!!!!!!!! *)
 Qed.
 
