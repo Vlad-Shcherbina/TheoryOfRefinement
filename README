@@ -1,4 +1,9 @@
+=========== Structure ===========
 
+basic.v contains common definitions, all other *.v files rely on it and
+do not have interdependencies (at least for now).
+
+All proved statements are summarized in to_prove.tex manually.
 
 
 =========== Instructions =============
